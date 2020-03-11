@@ -1,0 +1,86 @@
+class Point {
+
+  field int cx;
+  field int cy;
+
+  constructor Point new(int x, int y) {
+    let cx = x;
+    let cy = y;
+
+    return this;
+  }
+
+  method int getX() {
+    return cx;
+  }
+
+  method int getY() {
+    return cy;
+  }
+
+  method void setX(int x) {
+    cx = x;
+  }
+
+  method void setY(int y) {
+    cy = y;
+  }
+}
+
+class Box {
+
+  field int  Point _p1;
+  field int Point _p2;
+
+
+  method void Box (Point p1, Point p2) {
+    _p1 = p1;
+    _p2 = p2;
+  }
+
+
+  method Point getP1() {
+    return _p1;
+  }
+
+  method Point getP2() {
+    return _p2;
+  }
+
+  method void setP1(Point p1) {
+    _p1 = p1;
+  }
+
+  method void setP2(Point p2) {
+    _p2 = p2;
+  }
+
+  method int getWidth () {
+    return _p2.getX() - _p1.getX();
+  }
+
+  public int getHeight() {
+      return _p2.getY() - _p1.getY();
+  }
+
+  public double getArea() 
+  {
+         return (getWidth() * getHeight());
+  }
+
+}
+
+
+
+
+class Main {
+  function void main() {
+    var Box bom (new Point (0, 0), new Point (10, 6));
+    do Output.printInt (box.getWidth());
+    do Output.printInt (box.getHeight());
+    do Output.printInt (box.getArea());
+
+    return
+    
+  }
+}
