@@ -1,4 +1,54 @@
 
+### Implementação
+
+O objetivo é então implementar um analisado léxico, aqui denominado `JackTokenizer`. 
+
+Definir uma API padrão é muito difícil, dado os diferentes paradigmas e tipos de linguagem. Porém, seguindo o projeto, podemos propor a seguinte API:
+
+| Rotina        | Argumentos         | Retorno | Funcionalidade                                                                                                                                     |
+| ------------- | ------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Constructor   | Arquivo de entrada | -       | Abre um arquivo .jack                                                                                                                              |
+| hasMoreTokens | _                  | Boolean | Retorna verdadeiro caso exista mais tokens                                                                                                         |
+| advance       | _                  |         | Avança para o próximo token, atualizando assim a variável tokenCorrente. Esse método só pode ser executado caso hasMoreTokens retornar verdadeiro. |
+| tokenType     | _                  | TokenClass |    Retorna o tipo do token corrente (keyword,symbol, identier ... ) Usualmente implementado por um enumerate em linguagens estáticas  |
+| keyWord       |                    | KeywordType  | Retorna o keyword como uma constant, usualmente um enumerado. Só pode ser chamado quando tokenType é Keyword |
+| symbol        |                    | char        |  Retorna  o caracter que o toke corrente      |
+| identifier    |                    |  string       | Retorna o identificador como uma string|
+| intVal        |                    |    int     |    Retorna a constante inteira como um número|
+| stringVal     |                    |    string     |  Retorna a constante string sem as aspas duplas  |
+
+
+> Caso utilize uma linguagem dinamicamente tipada, os métodos keyword, symbol, identifier, intVal e stringVal podem ser resumido apenas a um único método getToken. 
+
+| Rotina        | Argumentos      |    Funcionalidade                                                                                                                                     |
+| ------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Constructor   | Arquivo de entrada  | Abre um arquivo .jack                                                                                                                              |
+| hasMoreTokens | _                  | Retorna verdadeiro caso exista mais tokens                                                                                                         |
+| advance       | _                  | Avança para o próximo token, atualizando assim a variável tokenCorrente. Esse método só pode ser executado caso hasMoreTokens retornar verdadeiro. |
+| tokenType     | _                  | Retorna o tipo do token corrente (keyword,symbol, identier ... ), podendo ser no formato de string ou uma constante na linguagem |
+| getToken     | _                  | Retorna o token corrente |
+
+
+Como usualmente não existem tipos enumerados em linguagens dinâmicas, uma boa prática é criar constantes para representar os tipos:
+
+```python
+TK_KEYWORD = 0
+TK_SYMBOL = 1
+TK_INTCONST = 2
+```
+Desse modo, poderá depois utilizar essas constantes em todo código, evitanto possíveis erros de digitação. Em Python poderia usar assim:
+
+```python
+from enum import Enum
+class Token(Enum):
+  KEYWORD = 0
+  SYMBOL = 1
+  INTCONST = 2
+```
+
+
+
+
 ### Usando a API
 
 Um pseudocódigo que mostra como poderiamos usar a API JackTokenizer.
